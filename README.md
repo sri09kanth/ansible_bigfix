@@ -5,19 +5,22 @@ The BigFix application provides software use analysis and configuration manageme
 
 Requirements
 ------------
+```bash
 
 besagent.rpm - Linux rpm installer
 bigfix.msi - Windows msi installer
+```
 
 Role Variables
 --------------
-
+```bash
 #default agent path directory
 win_agent_path: "C:\\Temp\\Agents"
 lin_agent_path: "/opt/GSA/install_files"
 
 #default agent log path directory
 win_agent_logs: "C:\\Temp\\Agents\\Logs"
+```
 
 Dependencies
 ------------
