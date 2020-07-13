@@ -1,0 +1,4 @@
+/**/*.retry
+.ansible/tmp/*
+vault_pass.txt
+*.pem

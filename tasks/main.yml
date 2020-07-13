@@ -1,2 +1,7 @@
 ---
-# tasks file for template
+- name: ensure all tasks based on the distribution are loaded
+- include: windows.yml
+  when: ansible_os_family = 'Windows'
+
+- include: rhel.yml
+  when: ansible_distribution == 'Red Hat Enterprise Linux'

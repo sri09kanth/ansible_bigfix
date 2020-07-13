@@ -1,0 +1,10 @@
+---
+- name: install windows bigfix agent
+  win_package:
+    path: '{{ win_agent_path }}\\{{ item.name }}'
+    chdir: '{{ win_agent_path }}'
+    log_path: '{{ win_agent_logs }}'
+    state: present
+    arguments: /qn
+  with_items:
+    - { name: 'bigfix.msi' }
