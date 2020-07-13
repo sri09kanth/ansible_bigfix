@@ -7,8 +7,8 @@ Requirements
 ------------
 ```bash
 
-besagent.rpm - Linux rpm installer
-bigfix.msi - Windows msi installer
+besagent.rpm - linux rpm installer
+bigfix.msi - windows msi installer
 ```
 
 Role Variables
