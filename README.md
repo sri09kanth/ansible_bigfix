@@ -1,4 +1,4 @@
-ansible-bigfix
+bigfix [![circleci](https://circleci.com/gh/GSA/ansible-bigfix.svg?style=svg)](https://circleci.com/gh/GSA/ansible-bigfix)
 =========
 
 The BigFix application provides software use analysis and configuration management capabilities by capturing CDM information from the clients installed on endpoints. This ansible role installs and configures the agent required to communicate with client machines.
@@ -6,40 +6,35 @@ The BigFix application provides software use analysis and configuration manageme
 Requirements
 ------------
 
-```bash
-redhat_bigfix_agent_filename: #redhat installer msi
-windows_bigfix_agent_filename: #windows installer msi
-```
+Required Packages
+- besagent.rpm - linux installer package
+- bigfix.exe - windows installer package
 
 Role Variables
 --------------
-```bash
-None
-```
+
+- redhat_bigfix_agent_filename: #redhat installer msi
+- windows_bigfix_agent_filename: #windows installer msi
 
 Dependencies
 ------------
-Acquire Installers
-```bash
-besagent.rpm - linux installer package
-bigfix.exe - windows installer package
-```
+
+None
 
 Example Playbook
 ----------------
 
-```bash
+```yaml
     - hosts: servers
       roles:
          - ansible-bigfix
 ```
 
-License
--------
+Public domain
+-------------
 
-MIT
+This project is in the worldwide [public domain](LICENSE.md). As stated in [CONTRIBUTING](CONTRIBUTING.md):
 
-Author Information
-------------------
-
-Lance White - GSA/GEO
+> This project is in the public domain within the United States, and copyright and related rights in the work worldwide are waived through the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+>
+> All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest.
