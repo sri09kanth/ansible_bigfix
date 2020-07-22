@@ -27,7 +27,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - ansible-bigfix
+     - bigfix
 ```
 
 Public domain
