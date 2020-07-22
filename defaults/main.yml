@@ -1,9 +1,5 @@
 ---
-# defaults file for grace-ansible-bigfix
-
-#default agent path directory
-win_agent_path: "C:\\Temp\\Agents"
-lin_agent_path: "/opt/GSA/install_files"
-
-#default agent log path directory
-win_agent_logs: "C:\\Temp\\Agents\\Logs"
+# defaults file for ansible-bigfix
+win_agent_path: "C:\\Temp\\Agents" # default agent path directory windows
+lin_agent_path: "/opt/GSA/install_files" # default agent path directory redhat
+win_agent_logs: "C:\\Temp\\Agents\\Logs" # default agent log directory windows

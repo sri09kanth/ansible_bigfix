@@ -1,13 +1,13 @@
 ---
-# handlers file for grace-ansible-bigfix
-- name: restart foo
+# handlers file for ansible-bigfix
+- name: restart bigfix service (redhat)
   service:
     name: besclient
     state: restarted
-  when: ansible_distribution == 'Red Hat Enterprise Linux'
+  when: ansible_os_family = 'RedHat'
 
-- name: restart bigfix service
+- name: restart bigfix service (windows)
   win_service:
-    name: BESClient
+    name: besclient
     state: restarted
   when: ansible_os_family = 'Windows'
