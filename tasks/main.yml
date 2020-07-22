@@ -1,7 +1,19 @@
 ---
-- name: ensure all tasks based on the distribution are loaded
-- include: windows.yml
-  when: ansible_os_family = 'Windows'
+- name: install bigfix agent (redhat)
+  yum:
+    name: '{{ lin_agent_path }}/{{ item.name }}'
+    state: present
+  with_items:
+    - { name: '{{ redhat_bigfix_agent_filename }}'}
+  when: ansible_os_family = 'RedHat'
 
-- include: rhel.yml
-  when: ansible_distribution == 'Red Hat Enterprise Linux'
+- name: install bigfix agent (windows)
+  win_package:
+    path: '{{ win_agent_path }}\\{{ item.name }}'
+    chdir: '{{ win_agent_path }}'
+    log_path: '{{ win_agent_logs }}'
+    state: present
+    arguments: /qn
+  with_items:
+    - { name: '{{ windows_bigfix_agent_filename }}' }
+  when: ansible_os_family = 'Windows'

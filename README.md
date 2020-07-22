@@ -1,40 +1,38 @@
-grace-ansible-bigfix
+ansible-bigfix
 =========
 
 The BigFix application provides software use analysis and configuration management capabilities by capturing CDM information from the clients installed on endpoints. This ansible role installs and configures the agent required to communicate with client machines.
 
 Requirements
 ------------
-```bash
 
-besagent.rpm - linux rpm installer
-bigfix.msi - windows msi installer
+```bash
+redhat_bigfix_agent_filename: #redhat installer msi
+windows_bigfix_agent_filename: #windows installer msi
 ```
 
 Role Variables
 --------------
 ```bash
-#default agent path directory
-win_agent_path: "C:\\Temp\\Agents"
-lin_agent_path: "/opt/GSA/install_files"
-
-#default agent log path directory
-win_agent_logs: "C:\\Temp\\Agents\\Logs"
+None
 ```
 
 Dependencies
 ------------
-
-None
+Acquire Installers
+```bash
+besagent.rpm - linux installer package
+bigfix.exe - windows installer package
+```
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
+```bash
     - hosts: servers
       roles:
-         - grace-ansible-bigfix
+         - ansible-bigfix
+```
 
 License
 -------
