@@ -9,6 +9,7 @@ Requirements
 Required Packages (this role requires access to the following packages/installers)
 - besagent.rpm - linux installer package
 - bigfix.exe - windows installer package
+- masthead.afxm - bigfix masthead file
 
 Role Variables
 --------------
