@@ -1,7 +1,7 @@
 bigfix [![circleci](https://circleci.com/gh/GSA/ansible-bigfix.svg?style=svg)](https://circleci.com/gh/GSA/ansible-bigfix)
 =========
 
-This ansible role installs and configures the agent required to communicate with client machines.
+This ansible role installs and configures the bigfix agent required to communicate with client machines.
 
 Requirements
 ------------
