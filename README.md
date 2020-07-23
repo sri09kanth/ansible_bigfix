@@ -1,20 +1,22 @@
 bigfix [![circleci](https://circleci.com/gh/GSA/ansible-bigfix.svg?style=svg)](https://circleci.com/gh/GSA/ansible-bigfix)
 =========
 
-The BigFix application provides software use analysis and configuration management capabilities by capturing CDM information from the clients installed on endpoints. This ansible role installs and configures the agent required to communicate with client machines.
+This ansible role installs and configures the agent required to communicate with client machines.
 
 Requirements
 ------------
 
-Required Packages
+Required Packages (this role requires access to the following packages/installers)
 - besagent.rpm - linux installer package
 - bigfix.exe - windows installer package
 
 Role Variables
 --------------
 
-- redhat_bigfix_agent_filename: #redhat installer msi
-- windows_bigfix_agent_filename: #windows installer msi
+| Variable | Default | Purpose |
+| ------ | ------ | ------ |
+| redhat_bigfix_agent_filename | "" | redhat installer msi |
+| windows_bigfix_agent_filename | "" | windows installer msi |
 
 Dependencies
 ------------

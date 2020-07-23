@@ -1,4 +1,11 @@
 ---
+- name: create lin_agent_path directory
+  file:
+    path: '{{ lin_agent_path }}'
+    state: directory
+    mode: '0755'
+  when: ansible_os_family = 'RedHat'
+
 - name: install bigfix agent (redhat)
   yum:
     name: '{{ lin_agent_path }}/{{ item.name }}'
@@ -6,6 +13,18 @@
   with_items:
     - { name: '{{ redhat_bigfix_agent_filename }}'}
   when: ansible_os_family = 'RedHat'
+
+- name: create win_agent_path directory
+  win_file:
+    path: '{{ win_agent_path }}'
+    state: directory
+  when: ansible_os_family = 'Windows'
+
+- name: create win_agent_logs directory
+  win_file:
+    path: '{{ win_agent_logs }}'
+    state: directory
+  when: ansible_os_family = 'Windows'
 
 - name: install bigfix agent (windows)
   win_package:
