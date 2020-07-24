@@ -13,6 +13,7 @@
     mode: '0755'
   when: ansible_os_family == 'RedHat'
 
+# replace with S3 method
 - name: move installer to {{ lin_install_path }} directory
   copy:
     src: '{{ lin_agent_path }}/{{ item.name }}'
@@ -30,6 +31,7 @@
     - { name: '{{ redhat_bigfix_agent_filename }}'}
   when: ansible_os_family == 'RedHat'
 
+# replace with S3 method
 - name: move actionsite.afxm to {{ lin_install_path }} directory
   copy:
     src: '{{ lin_agent_path }}/{{ item.name }}'
@@ -55,6 +57,7 @@
     state: directory
   when: ansible_os_family == 'Windows'
 
+# replace with S3 method
 - name: move installer to {{ win_agent_path }} directory
   win_copy:
     src: '{{ lin_agent_path }}/{{ item.name }}'
@@ -63,6 +66,7 @@
     - { name: '{{ windows_bigfix_agent_filename }}'}
   when: ansible_os_family == 'Windows'
 
+# replace with S3 method
 - name: move actionsite.afxm to {{ win_agent_path }} directory
   win_copy:
     src: '{{ lin_agent_path }}/{{ item.name }}'
