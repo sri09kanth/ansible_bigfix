@@ -28,7 +28,7 @@
     mode: '0755'
   with_items:
     - { name: '{{ redhat_bigfix_agent_filename }}'}
-  when: installer.stat.exists == False
+  when: installer.stat.exists
 
 - name: install bigfix agent (redhat)
   yum:
@@ -36,7 +36,7 @@
     state: installed
   with_items:
     - { name: '{{ redhat_bigfix_agent_filename }}'}
-  when: actionsite.stat.exists == False
+  when: actionsite.stat.exists
 
 # replace with S3 method
 - name: move actionsite.afxm to {{ lin_install_path }} directory
