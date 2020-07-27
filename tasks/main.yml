@@ -1,69 +1,8 @@
 ---
-- name: create {{ lin_agent_path }} directory
-  file:
-    path: '{{ lin_agent_path }}'
-    state: directory
-    mode: '0755'
+- name: RedHat
+  include: redhat.yml
   when: ansible_os_family == 'RedHat'
 
-- name: create {{ lin_install_path }} directory
-  file:
-    path: '{{ lin_install_path }}'
-    state: directory
-    mode: '0755'
-  when: ansible_os_family == 'RedHat'
-
-# replace with S3 method
-- name: move installer to {{ lin_install_path }} directory
-  copy:
-    src: '{{ lin_agent_path }}/{{ item.name }}'
-    dest: '{{ lin_install_path }}{{ item.name }}'
-    mode: '0755'
-  with_items:
-    - { name: '{{ redhat_bigfix_agent_filename }}'}
-  when: ansible_os_family == 'RedHat'
-
-- name: install bigfix agent (redhat)
-  yum:
-    name: '{{ lin_install_path }}{{ item.name }}'
-    state: installed
-  with_items:
-    - { name: '{{ redhat_bigfix_agent_filename }}'}
-  when: ansible_os_family == 'RedHat'
-
-# replace with S3 method
-- name: move actionsite.afxm to {{ lin_install_path }} directory
-  copy:
-    src: '{{ lin_agent_path }}/{{ item.name }}'
-    dest: '{{ lin_install_path }}{{ item.name }}'
-    mode: '0755'
-  with_items:
-    - { name: 'actionsite.afxm'}
-  when: ansible_os_family == 'RedHat'
-
-- name: start bigfix agent
-  command: "/etc/init.d/besclient start"
-  when: ansible_os_family == 'RedHat'
-
-- name: create {{ win_agent_path }} directory
-  win_file:
-    path: '{{ win_agent_path }}'
-    state: directory
-  when: ansible_os_family == 'Windows'
-
-- name: create {{ win_agent_logs }} directory
-  win_file:
-    path: '{{ win_agent_logs }}'
-    state: directory
-  when: ansible_os_family == 'Windows'
-
-- name: install bigfix agent (windows)
-  win_package:
-    path: '{{ win_agent_path }}\\{{ item.name }}'
-    chdir: '{{ win_agent_path }}'
-    log_path: '{{ win_agent_logs }}\\{{ item.name }}_log.txt'
-    state: present
-    arguments: /qn
-  with_items:
-    - { name: '{{ windows_bigfix_agent_filename }}' }
+- name: Windows
+  include: windows.yml
   when: ansible_os_family == 'Windows'

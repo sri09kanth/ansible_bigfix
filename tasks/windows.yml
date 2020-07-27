@@ -1,0 +1,46 @@
+---
+- name: create {{ win_agent_path }} directory
+  win_file:
+    path: '{{ win_agent_path }}'
+    state: directory
+
+- name: create {{ win_agent_logs }} directory
+  win_file:
+    path: '{{ win_agent_logs }}'
+    state: directory
+
+- name: checking for installer
+  win_stat:
+    path: '{{ win_agent_path }}{{ windows_bigfix_agent_filename }}'
+  register: installer
+
+- name: checking for actionsite.afxm
+  win_stat:
+    path: '{{ win_agent_path }}{{ bigfix_action_filename }}'
+  register: actionsite
+
+- name: move installer to {{ win_agent_path }} directory
+  win_copy:
+    src: '{{ lin_agent_path }}/{{ item.name }}'
+    dest: '{{ win_agent_path }}{{ item.name }}'
+  with_items:
+    - { name: '{{ windows_bigfix_agent_filename }}'}
+  when: installer.stat.exists == False
+
+- name: move actionsite.afxm to {{ win_agent_path }} directory
+  win_copy:
+    src: '{{ lin_agent_path }}/{{ item.name }}'
+    dest: '{{ win_agent_path }}{{ item.name }}'
+  with_items:
+    - { name: 'actionsite.afxm'}
+  when: actionsite.stat.exists == False
+
+- name: install bigfix agent (windows)
+  win_package:
+    path: '{{ win_agent_path }}\\{{ item.name }}'
+    chdir: '{{ win_agent_path }}'
+    log_path: '{{ win_agent_logs }}\\{{ item.name }}_log.txt'
+    state: present
+    arguments: /qn
+  with_items:
+    - { name: '{{ windows_bigfix_agent_filename }}' }

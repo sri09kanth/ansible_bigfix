@@ -1,0 +1,51 @@
+---
+- name: create {{ lin_agent_path }} directory
+  file:
+    path: '{{ lin_agent_path }}'
+    state: directory
+    mode: '0755'
+
+- name: create {{ lin_install_path }} directory
+  file:
+    path: '{{ lin_install_path }}'
+    state: directory
+    mode: '0755'
+
+- name: checking for installer
+  stat:
+    path: '{{ lin_agent_path }}{{ redhat_bigfix_agent_filename }}'
+  register: installer
+
+- name: checking for actionsite.afxm
+  stat:
+    path: '{{ lin_agent_path }}{{ bigfix_action_filename }}'
+  register: actionsite
+
+- name: move installer to {{ lin_install_path }} directory
+  copy:
+    src: '{{ lin_agent_path }}/{{ item.name }}'
+    dest: '{{ lin_install_path }}{{ item.name }}'
+    mode: '0755'
+  with_items:
+    - { name: '{{ redhat_bigfix_agent_filename }}'}
+  when: installer.stat.exists == False
+
+- name: install bigfix agent (redhat)
+  yum:
+    name: '{{ lin_install_path }}{{ item.name }}'
+    state: installed
+  with_items:
+    - { name: '{{ redhat_bigfix_agent_filename }}'}
+  when: actionsite.stat.exists == False
+
+# replace with S3 method
+- name: move actionsite.afxm to {{ lin_install_path }} directory
+  copy:
+    src: '{{ lin_agent_path }}/{{ item.name }}'
+    dest: '{{ lin_install_path }}{{ item.name }}'
+    mode: '0755'
+  with_items:
+    - { name: 'actionsite.afxm'}
+
+- name: start bigfix agent
+  command: "/etc/init.d/besclient start"
