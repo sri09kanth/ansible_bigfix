@@ -8,7 +8,7 @@ Requirements
 
 Required Packages (this role requires access to the following packages/installers)
 - besagent.rpm - linux installer package
-- bigfix.exe - windows installer package
+- bigfix.msi - windows installer package
 - masthead.afxm - bigfix masthead file
 
 Role Variables
@@ -16,7 +16,7 @@ Role Variables
 
 | Variable | Default | Purpose |
 | ------ | ------ | ------ |
-| redhat_bigfix_agent_filename | "" | redhat installer msi |
+| redhat_bigfix_agent_filename | "" | redhat installer rpm |
 | windows_bigfix_agent_filename | "" | windows installer msi |
 
 Dependencies

@@ -37,8 +37,8 @@
 
 - name: install bigfix agent (windows)
   win_package:
-    path: '{{ win_agent_path }}\\{{ item.name }}'
     chdir: '{{ win_agent_path }}'
+    path: '{{ win_agent_path }}\\{{ item.name }}'
     log_path: '{{ win_agent_logs }}\\{{ item.name }}_log.txt'
     state: present
     arguments: /qn
