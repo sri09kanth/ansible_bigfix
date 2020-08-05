@@ -29,7 +29,6 @@ Role Variables
 | ------ | ------ | ------ |
 | redhat_agent_path | "/opt/BESClient" | default redhat install directory |
 | redhat_bigfix_agent_url | "" | redhat installer rpm |
-| windows_bigfix_product_id | "" | win_package using a url requires a product_id |
 
 Dependencies
 ------------
