@@ -9,6 +9,7 @@
   win_package:
     path: '{{ windows_bigfix_agent_url }}'
     log_path: '{{ windows_agent_log }}\\bigfix_log.txt'
+    product_id: '{{ windows_bigfix_product_id }}'
     validate_certs: no
     state: present
     arguments: /qn
@@ -23,4 +24,3 @@
   win_get_url:
     url: '{{ bigfix_actionsite_url }}'
     dest: '{{ windows_agent_path }}\\ActionSite.afxm'
-    mode: '0755'

@@ -16,8 +16,9 @@ Role Variables
 
 | Variable | Default | Purpose |
 | ------ | ------ | ------ |
-| redhat_bigfix_agent_filename | "" | redhat installer msi |
-| windows_bigfix_agent_filename | "" | windows installer msi |
+| redhat_bigfix_agent_url | "" | redhat installer rpm |
+| windows_bigfix_agent_url | "" | windows installer msi |
+| windows_bigfix_product_id | "" | windows product_id |
 
 Dependencies
 ------------

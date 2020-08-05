@@ -1,5 +1,9 @@
 ---
 # defaults file for ansible-bigfix
 redhat_agent_path: "/etc/opt/BESClient" # default redhat install directory
-windows_agent_path: "C:\\Program Files(x86)\\BigFix Enterprise\\BES Client" # default windows install directory
+windows_agent_path: "C:\\Program Files (x86)\\BigFix Enterprise\\BES Client" # default windows install directory
 windows_agent_log: "C:\\Temp\\Logs" # default agent windows log directory
+redhat_bigfix_agent_url: "" # default redhat agent url
+windows_bigfix_agent_url: "" # default windows agent url
+bigfix_actionsite_url: "" # default actionsite.afxm url
+windows_bigfix_product_id: "" # default product_id
