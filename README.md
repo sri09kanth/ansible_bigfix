@@ -6,7 +6,7 @@ This ansible role installs and configures the bigfix agent required to communica
 Requirements
 ------------
 
-Required Packages (this role requires access to the following packages/installers)
+Required Packages (this role requires access to the following packages/installers via an external repository)
 - besagent.rpm - linux installer package
 - bigfix.exe - windows installer package
 - masthead.afxm - bigfix masthead file
@@ -14,11 +14,19 @@ Required Packages (this role requires access to the following packages/installer
 Role Variables
 --------------
 
-| Variable | Default | Purpose |
+| Variable (Windows) | Default | Purpose |
 | ------ | ------ | ------ |
-| redhat_bigfix_agent_url | "" | redhat installer rpm |
+| windows_agent_path | "C:\Program Files (x86)\BigFix Enterprise\BES Client" | default windows install directory |
+| windows_agent_log | "C:\Temp\Logs" | default agent windows log directory |
 | windows_bigfix_agent_url | "" | windows installer msi |
 | windows_bigfix_product_id | "" | windows product_id |
+
+
+| Variable (Redhat) | Default | Purpose |
+| ------ | ------ | ------ |
+| redhat_agent_path | "/opt/BESClient" | default redhat install directory |
+| redhat_bigfix_agent_url | "" | redhat installer rpm |
+| windows_bigfix_product_id | "" | win_package using a url requires a product_id |
 
 Dependencies
 ------------
