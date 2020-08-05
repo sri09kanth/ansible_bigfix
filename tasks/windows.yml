@@ -1,46 +1,26 @@
 ---
-- name: create {{ win_agent_path }} directory
+- name: create {{ windows_agent_log }} directory
   win_file:
-    path: '{{ win_agent_path }}'
+    path: '{{ windows_agent_log }}'
+    recurse: yes
     state: directory
-
-- name: create {{ win_agent_logs }} directory
-  win_file:
-    path: '{{ win_agent_logs }}'
-    state: directory
-
-- name: checking for installer
-  win_stat:
-    path: '{{ win_agent_path }}{{ windows_bigfix_agent_filename }}'
-  register: installer
-
-- name: checking for actionsite.afxm
-  win_stat:
-    path: '{{ win_agent_path }}{{ bigfix_action_filename }}'
-  register: actionsite
-
-- name: move installer to {{ win_agent_path }} directory
-  win_copy:
-    src: '{{ lin_agent_path }}/{{ item.name }}'
-    dest: '{{ win_agent_path }}{{ item.name }}'
-  with_items:
-    - { name: '{{ windows_bigfix_agent_filename }}'}
-  when: not installer.stat.exists
-
-- name: move actionsite.afxm to {{ win_agent_path }} directory
-  win_copy:
-    src: '{{ lin_agent_path }}/{{ item.name }}'
-    dest: '{{ win_agent_path }}{{ item.name }}'
-  with_items:
-    - { name: 'actionsite.afxm'}
-  when: not actionsite.stat.exists
 
 - name: install bigfix agent (windows)
   win_package:
-    path: '{{ win_agent_path }}\\{{ item.name }}'
-    chdir: '{{ win_agent_path }}'
-    log_path: '{{ win_agent_logs }}\\{{ item.name }}_log.txt'
+    path: '{{ windows_bigfix_agent_url }}'
+    log_path: '{{ windows_agent_log }}\\bigfix_log.txt'
+    validate_certs: no
     state: present
     arguments: /qn
-  with_items:
-    - { name: '{{ windows_bigfix_agent_filename }}' }
+
+- name: create {{ windows_agent_path }} directory
+  win_file:
+    path: '{{ windows_agent_path }}'
+    recurse: yes
+    state: directory
+
+- name: copy actionsite.afxm to {{ windows_agent_path }} directory
+  win_get_url:
+    url: '{{ bigfix_actionsite_url }}'
+    dest: '{{ windows_agent_path }}\\ActionSite.afxm'
+    mode: '0755'

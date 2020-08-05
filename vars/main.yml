@@ -1,2 +1,5 @@
 ---
 # vars file for ansible-bigfix
+redhat_bigfix_agent_url: "" # default redhat agent url
+windows_bigfix_agent_url: "" # default windows agent url
+bigfix_actionsite_url: "" # default actionsite.afxm url
