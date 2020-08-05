@@ -14,15 +14,18 @@ Required Packages (this role requires access to the following packages/installer
 Role Variables
 --------------
 
-| Variable (Windows) | Default | Purpose |
+### Windows
+
+| Variable | Default | Purpose |
 | ------ | ------ | ------ |
 | windows_agent_path | "C:\Program Files (x86)\BigFix Enterprise\BES Client" | default windows install directory |
 | windows_agent_log | "C:\Temp\Logs" | default agent windows log directory |
 | windows_bigfix_agent_url | "" | windows installer msi |
 | windows_bigfix_product_id | "" | windows product_id |
 
+### Redhat
 
-| Variable (Redhat) | Default | Purpose |
+| Variable | Default | Purpose |
 | ------ | ------ | ------ |
 | redhat_agent_path | "/opt/BESClient" | default redhat install directory |
 | redhat_bigfix_agent_url | "" | redhat installer rpm |
