@@ -40,6 +40,7 @@
   win_get_url:
     url: '{{ bigfix_actionsite_url }}'
     dest: '{{ windows_agent_path }}\\ActionSite.afxm'
+    validate_certs: no
   when: path.stat.islnk is not defined
 
 - name: verify bigfix started

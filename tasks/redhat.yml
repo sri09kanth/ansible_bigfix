@@ -24,6 +24,7 @@
   get_url:
     url: '{{ bigfix_actionsite_url }}'
     dest: '{{ redhat_bigfix_agent_path }}/actionsite.afxm'
+    validate_certs: no
     mode: '0755'
   when: path.stat.islnk is not defined
 
