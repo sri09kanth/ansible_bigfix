@@ -1,21 +1,39 @@
 ---
-- name: create {{ redhat_agent_path }} directory
+- name: checking for agent install
+  stat:
+    path: '{{ redhat_bigfix_agent_path }}'
+  register: path
+
+- debug:
+    msg: "bigfix agent not found"
+  when: path.stat.islnk is not defined
+
+- debug:
+    msg: "bigfix agent found skipping install"
+  when: path.stat.islnk is defined
+
+- name: create {{ redhat_bigfix_agent_path }} directory
   file:
-    path: '{{ redhat_agent_path }}'
+    path: '{{ redhat_bigfix_agent_path }}'
     recurse: yes
     state: directory
     mode: '0755'
+  when: path.stat.islnk is not defined
 
 - name: copy actionsite.afxm to {{ redhat_agent_path }} directory
   get_url:
     url: '{{ bigfix_actionsite_url }}'
-    dest: '{{ redhat_agent_path }}/actionsite.afxm'
+    dest: '{{ redhat_bigfix_agent_path }}/actionsite.afxm'
     mode: '0755'
+  when: path.stat.islnk is not defined
 
 - name: install bigfix agent (redhat)
   yum:
     name: '{{ redhat_bigfix_agent_url }}'
     state: present
+  when: path.stat.islnk is not defined
 
-- name: start bigfix agent
-  command: "/etc/init.d/besclient start"
+- name: verify solarwinds started
+  service:
+    name: besclient
+    state: started

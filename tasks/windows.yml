@@ -1,9 +1,23 @@
 ---
+- name: checking for agent install
+  win_stat:
+    path: '{{ windows_bigfix_agent_path }}'
+  register: path
+
+- debug:
+    msg: "bigfix agent not found"
+  when: path.stat.islnk is not defined
+
+- debug:
+    msg: "bigfix agent found skipping install"
+  when: path.stat.islnk is defined
+
 - name: create {{ windows_agent_log }} directory
   win_file:
     path: '{{ windows_agent_log }}'
     recurse: yes
     state: directory
+  when: path.stat.islnk is not defined
 
 - name: install bigfix agent (windows)
   win_package:
@@ -13,14 +27,22 @@
     validate_certs: no
     state: present
     arguments: /qn
+  when: path.stat.islnk is not defined
 
 - name: create {{ windows_agent_path }} directory
   win_file:
     path: '{{ windows_agent_path }}'
     recurse: yes
     state: directory
+  when: path.stat.islnk is not defined
 
 - name: copy actionsite.afxm to {{ windows_agent_path }} directory
   win_get_url:
     url: '{{ bigfix_actionsite_url }}'
     dest: '{{ windows_agent_path }}\\ActionSite.afxm'
+  when: path.stat.islnk is not defined
+
+- name: verify solarwinds started
+  win_service:
+    name: besclient
+    state: started
