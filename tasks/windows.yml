@@ -42,7 +42,7 @@
     dest: '{{ windows_agent_path }}\\ActionSite.afxm'
   when: path.stat.islnk is not defined
 
-- name: verify solarwinds started
+- name: verify bigfix started
   win_service:
     name: besclient
     state: started

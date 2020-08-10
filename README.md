@@ -19,15 +19,15 @@ Role Variables
 | Variable | Default | Purpose |
 | ------ | ------ | ------ |
 | windows_bigfix_agent_path | "C:\Program Files (x86)\BigFix Enterprise\BES Client" | default windows install directory |
-| windows_agent_log | "C:\Temp\Logs" | default agent windows log directory |
 | windows_bigfix_agent_url | "" | windows installer msi |
 | windows_bigfix_product_id | "" | windows product_id |
+| windows_agent_log | "C:\Temp\Logs" | default agent windows log directory |
 
 ### Redhat
 
 | Variable | Default | Purpose |
 | ------ | ------ | ------ |
-| redhat_agent_path | "/etc/opt/BESClient" | default redhat install directory |
+| redhat_bigfix_agent_path | "/etc/opt/BESClient" | default redhat install directory |
 | redhat_bigfix_agent_url | "" | redhat installer rpm |
 
 Dependencies
