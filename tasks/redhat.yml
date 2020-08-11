@@ -32,6 +32,9 @@
   yum:
     name: '{{ redhat_bigfix_agent_url }}'
     state: present
+    validate_certs: no
+    disable_plugin: "yum-rhn-plugin"
+    disablerepo: "rhel-8-appstream-rhui-rpms,rhel-8-baseos-rhui-rpms,rhui-client-config-server-8"
   when: path.stat.islnk is not defined
 
 - name: verify solarwinds started
