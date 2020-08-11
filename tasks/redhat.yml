@@ -20,7 +20,7 @@
     mode: '0755'
   when: path.stat.islnk is not defined
 
-- name: copy actionsite.afxm to {{ redhat_agent_path }} directory
+- name: copy actionsite.afxm to {{ redhat_bigfix_agent_path }} directory
   get_url:
     url: '{{ bigfix_actionsite_url }}'
     dest: '{{ redhat_bigfix_agent_path }}/actionsite.afxm'
@@ -37,7 +37,8 @@
     disablerepo: "rhel-8-appstream-rhui-rpms,rhel-8-baseos-rhui-rpms,rhui-client-config-server-8"
   when: path.stat.islnk is not defined
 
-- name: verify solarwinds started
+- name: verify bigfix started
   service:
     name: besclient
+    enabled: yes
     state: started

@@ -12,9 +12,9 @@
     msg: "bigfix agent found skipping install"
   when: path.stat.islnk is defined
 
-- name: create {{ windows_agent_log }} directory
+- name: create {{ windows_bigfix_agent_path }} directory
   win_file:
-    path: '{{ windows_agent_log }}'
+    path: '{{ windows_bigfix_agent_path }}'
     recurse: yes
     state: directory
   when: path.stat.islnk is not defined
@@ -29,21 +29,15 @@
     arguments: /qn
   when: path.stat.islnk is not defined
 
-- name: create {{ windows_agent_path }} directory
-  win_file:
-    path: '{{ windows_agent_path }}'
-    recurse: yes
-    state: directory
-  when: path.stat.islnk is not defined
-
-- name: copy actionsite.afxm to {{ windows_agent_path }} directory
+- name: copy actionsite.afxm to {{ windows_bigfix_agent_path }} directory
   win_get_url:
     url: '{{ bigfix_actionsite_url }}'
-    dest: '{{ windows_agent_path }}\\ActionSite.afxm'
+    dest: '{{ windows_bigfix_agent_path }}\\ActionSite.afxm'
     validate_certs: no
   when: path.stat.islnk is not defined
 
 - name: verify bigfix started
   win_service:
     name: besclient
+    enabled: yes
     state: started
