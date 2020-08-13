@@ -1,16 +1,16 @@
 ---
 - name: checking for agent install
   stat:
-    path: '{{ redhat_bigfix_agent_path }}'
-  register: path
+    path: /etc/init.d/besclient
+  register: agent
 
 - debug:
-    msg: "bigfix agent not found"
-  when: path.stat.islnk is not defined
+    msg: "bigfix agent not found (installing)"
+  when: not agent.stat.exists
 
 - debug:
-    msg: "bigfix agent found skipping install"
-  when: path.stat.islnk is defined
+    msg: "bigfix agent found (skipping install)"
+  when: agent.stat.exists
 
 - name: install bigfix agent (redhat)
   yum:
@@ -19,7 +19,8 @@
     validate_certs: no
     disable_plugin: "yum-rhn-plugin"
     disablerepo: "rhel-8-appstream-rhui-rpms,rhel-8-baseos-rhui-rpms,rhui-client-config-server-8"
-  when: path.stat.islnk is not defined
+    download_dir: '{{ redhat_bigfix_agent_path }}'
+  when: not agent.stat.exists
 
 - name: copy actionsite.afxm to {{ redhat_bigfix_agent_path }} directory
   get_url:
@@ -27,7 +28,7 @@
     dest: '{{ redhat_bigfix_agent_path }}/actionsite.afxm'
     validate_certs: no
     mode: '0755'
-  when: path.stat.islnk is not defined
+  when: not agent.stat.exists
 
 - name: verify bigfix started
   service:
