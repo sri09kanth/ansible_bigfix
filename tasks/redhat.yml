@@ -12,12 +12,13 @@
     msg: "bigfix agent found skipping install"
   when: path.stat.islnk is defined
 
-- name: create {{ redhat_bigfix_agent_path }} directory
-  file:
-    path: '{{ redhat_bigfix_agent_path }}'
-    recurse: yes
-    state: directory
-    mode: '0755'
+- name: install bigfix agent (redhat)
+  yum:
+    name: '{{ redhat_bigfix_agent_url }}'
+    state: present
+    validate_certs: no
+    disable_plugin: "yum-rhn-plugin"
+    disablerepo: "rhel-8-appstream-rhui-rpms,rhel-8-baseos-rhui-rpms,rhui-client-config-server-8"
   when: path.stat.islnk is not defined
 
 - name: copy actionsite.afxm to {{ redhat_bigfix_agent_path }} directory
@@ -26,15 +27,6 @@
     dest: '{{ redhat_bigfix_agent_path }}/actionsite.afxm'
     validate_certs: no
     mode: '0755'
-  when: path.stat.islnk is not defined
-
-- name: install bigfix agent (redhat)
-  yum:
-    name: '{{ redhat_bigfix_agent_url }}'
-    state: present
-    validate_certs: no
-    disable_plugin: "yum-rhn-plugin"
-    disablerepo: "rhel-8-appstream-rhui-rpms,rhel-8-baseos-rhui-rpms,rhui-client-config-server-8"
   when: path.stat.islnk is not defined
 
 - name: verify bigfix started
