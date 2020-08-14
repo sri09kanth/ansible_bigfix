@@ -12,6 +12,13 @@
     msg: "bigfix agent found (skipping install)"
   when: agent.stat.exists
 
+- name: create {{ redhat_bigfix_agent_path }} directory
+  file:
+    path: '{{ windows_bigfix_agent_path }}'
+    recurse: yes
+    state: directory
+  when: not agent.stat.exists
+
 - name: install bigfix agent (redhat)
   yum:
     name: '{{ redhat_bigfix_agent_url }}'
