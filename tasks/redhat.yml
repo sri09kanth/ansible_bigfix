@@ -14,7 +14,7 @@
 
 - name: create {{ redhat_bigfix_agent_path }} directory
   file:
-    path: '{{ windows_bigfix_agent_path }}'
+    path: '{{ redhat_bigfix_agent_path }}'
     recurse: yes
     state: directory
   when: not agent.stat.exists
