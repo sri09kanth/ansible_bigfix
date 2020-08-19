@@ -17,6 +17,7 @@
     path: '{{ redhat_bigfix_agent_path }}'
     recurse: yes
     state: directory
+    mode: 0500
   when: not agent.stat.exists
 
 - name: install bigfix agent (redhat)
