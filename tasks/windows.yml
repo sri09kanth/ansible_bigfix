@@ -48,3 +48,13 @@
     enabled: yes
     state: started
     start_mode: auto
+
+- name: update registry for bigfix custom properties
+  win_regedit:
+    path: HKLM:\SOFTWARE\WOW6432Node\BigFix\EnterpriseClient\Settings\Client\{{ item.name }}
+    type: string
+    name: value
+    data: '{{ item.value }}'
+  with_items:
+    - "{{ bigfix_custom_properties }}"
+  when: not agent.exists
