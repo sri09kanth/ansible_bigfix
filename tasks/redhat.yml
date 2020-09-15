@@ -50,6 +50,7 @@
     create: yes
     backup: yes
     insertafter: BOF
+    mode: 0644
     line: |
       [Software\BigFix\EnterpriseClient\Settings\Client\{{ item.name }}]
       value                          = '{{ item.value }}'
