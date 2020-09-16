@@ -4,9 +4,9 @@
 #universal
 bigfix_actionsite_url: "" # default actionsite.afxm url
 bigfix_custom_properties:
-  - { name: GSA Environment, value: "{{ env | default('TEST') }}" }
-  - { name: GSA FISMA System, value: "{{ fisma | default('I-EIO-VE') }}" }
-  - { name: GSA Organization, value: "{{ org | default('GSAIT') }}" }
+  - { name: GSA Environment, value: '{{ env | default("TEST") }}' }
+  - { name: GSA FISMA System, value: '{{ fisma | default("I-EIO-VE") }}' }
+  - { name: GSA Organization, value: '{{ org | default("GSAIT") }}' }
   - { name: GSA Patch Group, value: "#GRACE|NEW BUILD" }
 
 #redhat

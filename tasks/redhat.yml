@@ -53,7 +53,7 @@
     mode: 0644
     line: |
       [Software\BigFix\EnterpriseClient\Settings\Client\{{ item.name }}]
-      value                          = '{{ item.value }}'
+      value                          = {{ item.value }}
       effective date                 = Thu,%2020%20Aug%202020%2010:17:38%20-0500
 
   with_items:
