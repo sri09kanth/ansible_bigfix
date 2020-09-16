@@ -49,7 +49,7 @@
     path: /var/opt/BESClient/besclient.config
     create: yes
     backup: yes
-    insertafter: BOF
+    insertafter: EOF
     mode: 0644
     line: |
       [Software\BigFix\EnterpriseClient\Settings\Client\{{ item.name }}]
@@ -58,4 +58,4 @@
 
   with_items:
     - "{{ bigfix_custom_properties }}"
-  when: not agent.exists
+  when: not agent.stat.exists
