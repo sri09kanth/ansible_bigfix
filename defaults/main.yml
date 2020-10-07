@@ -4,7 +4,7 @@
 #universal
 bigfix_actionsite_url: "" # default actionsite.afxm url
 bigfix_custom_properties:
-  - { name: GSA Environment, value: '{{ env | default("TEST") }}' }
+  - { name: GSA Environment, value: '{{ bigfix_env | default("TEST") }}' }
   - { name: GSA FISMA System, value: "I-EIO-VE" }
   - { name: GSA Organization, value: "GSAIT" }
   - { name: GSA Patch Group, value: "#VRA|NEW BUILD" }
