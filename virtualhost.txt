@@ -1,0 +1,23 @@
+[root@ip-172-31-44-51 conf.d]# cat market.conf
+<Directory /var/www/html/market1>
+        Require all granted
+        AllowOverride None
+</Directory>
+
+<VirtualHost 172.31.44.51:80>
+        DocumentRoot /var/www/html/market1/
+        ServerName web1.example.com
+        ServerAdmin root@web.example.com
+</VirtualHost>
+
+<Directory /var/www/html/market2>
+        Require all granted
+        AllowOverride None
+</Directory>
+
+<VirtualHost 172.31.44.51:80>
+        DocumentRoot /var/www/html/market2/
+        ServerName web2.example.com
+        ServerAdmin root@web2.example.com
+</VirtualHost>
+
